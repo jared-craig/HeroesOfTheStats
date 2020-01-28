@@ -16,7 +16,8 @@ namespace HeroesOfTheStats.Server.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Heroes = (await HeroDataService.CalculateWinRates()).OrderByDescending(x => x.win_rate).ToList();
+            await HeroDataService.CalculateWinRates();
+            Heroes = HeroDataService.GetAllHeroes().OrderByDescending(x => x.win_rate).ToList();
         }
     }
 }

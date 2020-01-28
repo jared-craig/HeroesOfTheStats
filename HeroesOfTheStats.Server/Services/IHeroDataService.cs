@@ -6,8 +6,9 @@ namespace HeroesOfTheStats.Server.Services
 {
     public interface IHeroDataService
     {
-        Task<IEnumerable<Hero>> GetAllHeroes();
-        Task<Hero> GetHeroDetails(string heroShortName);
-        Task<IEnumerable<Hero>> CalculateWinRates();
+        Task<IEnumerable<Hero>> InitializeHeroes();
+        Hero GetHeroDetails(string heroShortName);
+        Task CalculateWinRates();
+        IEnumerable<Hero> GetAllHeroes();
     }
 }

@@ -1,16 +1,16 @@
 ﻿@page "/herodetail/{HeroShortName}"
 @inherits HeroDetailBase
 
-<h1 class="page-title">@Hero.name Details</h1>
 @if (Hero.abilities == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
+    <h1 class="page-title">@Hero.name Details</h1>
     <div class="col-12 row">
         <div class="col-2">
-            <img src="@($"/images/HeroIcons/{Hero.name}_square_tile.png")" alt="@Hero.c_hero_id"/>
+            <img src="@($"/images/HeroDetails/{Hero.name}Detail.jpg")" width="200" alt="@Hero.c_hero_id" />
         </div>
         <div class="col-10 row">
             <div class="col-xs-12 col-sm-8">
@@ -18,6 +18,13 @@ else
                     <label class="col-sm-4 col-form-label">Name</label>
                     <div class="col-sm-8">
                         <label type="text" readonly class="form-control-plaintext">@Hero.name</label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Win Rate</label>
+                    <div class="col-sm-8">
+                        <label type="text" readonly class="form-control-plaintext">@Hero.win_rate</label>
                     </div>
                 </div>
 

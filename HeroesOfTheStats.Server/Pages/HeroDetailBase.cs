@@ -15,9 +15,9 @@ namespace HeroesOfTheStats.Server.Pages
 
         public Hero Hero { get; set; } = new Hero();
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            Hero = await HeroDataService.GetHeroDetails(HeroShortName);
+            Hero = HeroDataService.GetHeroDetails(HeroShortName);
         }
     }
 }
