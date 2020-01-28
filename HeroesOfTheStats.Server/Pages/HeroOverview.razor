@@ -1,0 +1,46 @@
+﻿@page "/herooverview"
+@inherits HeroOverviewBase
+
+@if (Heroes == null)
+{
+    <h2><em>Loading...</em></h2>
+}
+else
+{
+    <div>
+        <table class="hero-table">
+            <colgroup>
+                <col style="width:5%">
+                <col style="width:30%">
+                <col style="width:30%">
+                <col style="width:30%">
+                <col style="width:5%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Win Rate</th>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var hero in Heroes)
+                {
+                    <tr>
+                        <td class="hero-icon">
+                            <img src="@($"/images/HeroIcons/{hero.name}_square_tile.png")" alt="@($"{hero.short_name}")" />
+                        </td>
+                        <td class="hero-detail">@hero.name</td>
+                        <td class="hero-detail">@hero.win_rate</td>
+                        <td class="hero-detail">@hero.role</td>
+                        <td>
+                            <a href="@($"herodetail/{hero.short_name}")" class="btn btn-primary table-primary">Detail</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
