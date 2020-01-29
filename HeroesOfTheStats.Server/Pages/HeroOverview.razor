@@ -8,6 +8,10 @@
 else
 {
     <div>
+        <label>Search:</label>
+        <input type="text" id="searchBar" placeholder="Search for a hero" @bind-value="@SearchTerm" @bind-value:event="oninput" />
+    </div>
+    <div>
         <table>
             <colgroup>
                 <col style="width:5%">
@@ -26,7 +30,7 @@ else
                 </tr>
             </thead>
             <tbody>
-                @foreach (var hero in Heroes)
+                @foreach (var hero in FilteredHeroes)
                 {
                     <tr>
                         <td class="hero-icon">
