@@ -34,13 +34,13 @@ else
                 {
                     <tr>
                         <td class="hero-icon">
-                            <img src="@($"/images/HeroIcons/{hero.name}_square_tile.png")" alt="@($"{hero.short_name}")" />
+                            <img src="@($"/images/HeroIcons/{hero.Name}_square_tile.png")" alt="@($"{hero.ShortName}")" />
                         </td>
-                        <td class="hero-detail">@hero.name</td>
-                        <td class="hero-detail">@hero.win_rate</td>
-                        <td class="hero-detail">@hero.role</td>
+                        <td class="hero-detail">@hero.Name</td>
+                        <td class="hero-detail">@hero.WinRate</td>
+                        <td class="hero-detail">@hero.Role</td>
                         <td>
-                            <a href="@($"herodetail/{hero.short_name}")" class="btn btn-primary table-primary">Detail</a>
+                            <a href="@($"herodetail/{hero.ShortName}")" class="btn btn-primary table-primary">Detail</a>
                         </td>
                     </tr>
                 }

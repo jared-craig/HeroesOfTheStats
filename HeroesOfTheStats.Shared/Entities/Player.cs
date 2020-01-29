@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-namespace HeroesOfTheStats.Shared
+﻿namespace HeroesOfTheStats.Shared.Entities
 {
     public class Player
     {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 
-namespace HeroesOfTheStats.Shared
+namespace HeroesOfTheStats.Shared.Entities
 {
     public class Hero
     {

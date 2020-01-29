@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
-using HeroesOfTheStats.Server.Services;
-using HeroesOfTheStats.Shared;
+﻿using HeroesOfTheStats.Server.Services;
+using HeroesOfTheStats.Shared.DTOs;
 using Microsoft.AspNetCore.Components;
 
 namespace HeroesOfTheStats.Server.Pages
@@ -13,7 +12,7 @@ namespace HeroesOfTheStats.Server.Pages
         [Inject]
         public IHeroDataService HeroDataService { get; set; }
 
-        public Hero Hero { get; set; } = new Hero();
+        public HeroDto Hero { get; set; } = new HeroDto();
 
         protected override void OnInitialized()
         {
