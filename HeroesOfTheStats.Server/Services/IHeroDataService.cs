@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using HeroesOfTheStats.Shared;
+using HeroesOfTheStats.Shared.DTOs;
 
 namespace HeroesOfTheStats.Server.Services
 {
     public interface IHeroDataService
     {
-        Task<IEnumerable<Hero>> InitializeHeroes();
-        Hero GetHeroDetails(string heroShortName);
+        Task<IEnumerable<HeroDto>> InitializeHeroes();
+        HeroDto GetHeroDetails(string heroShortName);
         Task CalculateWinRates();
-        IEnumerable<Hero> GetAllHeroes();
+        IEnumerable<HeroDto> GetAllHeroes();
     }
 }

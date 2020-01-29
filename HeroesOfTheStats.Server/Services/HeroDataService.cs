@@ -5,34 +5,37 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using HeroesOfTheStats.Shared;
+using HeroesOfTheStats.Shared.DTOs;
+using HeroesOfTheStats.Shared.Entities;
 
 namespace HeroesOfTheStats.Server.Services
 {
     public class HeroDataService : IHeroDataService
     {
         private readonly HttpClient _httpClient;
-        private List<Hero> _heroes;
+        private List<HeroDto> _heroes;
 
         public HeroDataService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public IEnumerable<Hero> GetAllHeroes()
+        public IEnumerable<HeroDto> GetAllHeroes()
         {
             return _heroes;
         }
 
-        public async Task<IEnumerable<Hero>> InitializeHeroes()
+        public async Task<IEnumerable<HeroDto>> InitializeHeroes()
         {
-            return await JsonSerializer.DeserializeAsync<IEnumerable<Hero>>(
+            var heroes = await JsonSerializer.DeserializeAsync<IEnumerable<Hero>>(
                 await _httpClient.GetStreamAsync("heroes"),
                 new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
+            return heroes.Select(Mapper.MapHero).ToList();
         }
 
-        public Hero GetHeroDetails(string heroShortName)
+        public HeroDto GetHeroDetails(string heroShortName)
         {
-            return _heroes.First(h => h.short_name.Equals(heroShortName, StringComparison.OrdinalIgnoreCase));
+            return _heroes.First(h => h.ShortName.Equals(heroShortName, StringComparison.OrdinalIgnoreCase));
         }
 
         public async Task CalculateWinRates()
@@ -41,32 +44,33 @@ namespace HeroesOfTheStats.Server.Services
             var heroes = (await InitializeHeroes()).ToList();
             foreach (var replay in replays)
             {
-                foreach (var player in replay.players)
+                foreach (var player in replay.Players)
                 {
-                    if (player.winner)
+                    if (player.Winner)
                     {
-                        heroes.First(h => h.name.Equals(player.hero, StringComparison.OrdinalIgnoreCase)).wins++;
+                        heroes.First(h => h.Name.Equals(player.Hero, StringComparison.OrdinalIgnoreCase)).Wins++;
                     }
                     else
                     {
-                        heroes.First(h => h.name.Equals(player.hero, StringComparison.OrdinalIgnoreCase)).loses++;
+                        heroes.First(h => h.Name.Equals(player.Hero, StringComparison.OrdinalIgnoreCase)).Loses++;
                     }
                 }
             }
 
             foreach (var hero in heroes)
             {
-                hero.win_rate = (hero.wins + hero.loses) <= 0 ? 0.0 : Math.Round((hero.wins / (hero.wins + hero.loses) * 100), 2);
+                hero.WinRate = (hero.Wins + hero.Loses) <= 0 ? 0.0 : Math.Round(hero.Wins / (hero.Wins + hero.Loses) * 100, 2);
             }
 
             _heroes = heroes;
         }
 
-        private async Task<IEnumerable<Replay>> GetReplays(int minParsedId, bool withPlayers)
+        private async Task<IEnumerable<ReplayDto>> GetReplays(int minParsedId, bool withPlayers)
         {
-            return await JsonSerializer.DeserializeAsync<IEnumerable<Replay>>(
+            var replays = await JsonSerializer.DeserializeAsync<IEnumerable<Replay>>(
                 await _httpClient.GetStreamAsync($"replays/parsed?min_parsed_id={minParsedId}&with_players={withPlayers}"),
                 new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
+            return replays.Select(Mapper.MapReplay).ToList();
         }
     }
 }

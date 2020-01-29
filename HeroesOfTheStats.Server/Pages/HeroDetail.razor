@@ -1,46 +1,46 @@
 ﻿@page "/herodetail/{HeroShortName}"
 @inherits HeroDetailBase
 
-@if (Hero.abilities == null)
+@if (Hero.Abilities == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <h1 class="page-title">@Hero.name Details</h1>
+    <h1 class="page-title">@Hero.Name Details</h1>
     <div class="col-12 row">
         <div class="col-2">
-            <img src="@($"/images/HeroDetails/{Hero.name}Detail.jpg")" width="200" alt="@Hero.c_hero_id" />
+            <img src="@($"/images/HeroDetails/{Hero.Name}Detail.jpg")" width="200" alt="@Hero.CHeroId" />
         </div>
         <div class="col-10 row">
             <div class="col-xs-12 col-sm-8">
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">Name</label>
                     <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Hero.name</label>
+                        <label type="text" readonly class="form-control-plaintext">@Hero.Name</label>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">Win Rate</label>
                     <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Hero.win_rate</label>
+                        <label type="text" readonly class="form-control-plaintext">@Hero.WinRate</label>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">Role</label>
                     <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Hero.role</label>
+                        <label type="text" readonly class="form-control-plaintext">@Hero.Role</label>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">Abilities</label>
                     <div class="col-sm-8">
-                        @foreach (var ability in Hero.abilities)
+                        @foreach (var ability in Hero.Abilities)
                         {
-                            <label type="text" readonly class="form-control-plaintext">@ability.title</label>
+                            <label type="text" readonly class="form-control-plaintext">@ability.Title</label>
                         }
                     </div>
                 </div>

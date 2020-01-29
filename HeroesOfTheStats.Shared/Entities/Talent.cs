@@ -1,4 +1,4 @@
-﻿namespace HeroesOfTheStats.Shared
+﻿namespace HeroesOfTheStats.Shared.Entities
 {
     public class Talent
     {
