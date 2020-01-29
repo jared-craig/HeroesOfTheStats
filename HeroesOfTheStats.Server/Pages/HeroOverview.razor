@@ -3,12 +3,16 @@
 
 @if (Heroes == null)
 {
-    <h2><em>Loading...</em></h2>
+    <p><em>Loading...</em></p>
 }
 else
 {
     <div>
-        <table class="hero-table">
+        <label>Search:</label>
+        <input type="text" id="searchBar" placeholder="Search for a hero" @bind-value="@SearchTerm" @bind-value:event="oninput" />
+    </div>
+    <div>
+        <table>
             <colgroup>
                 <col style="width:5%">
                 <col style="width:30%">
@@ -19,14 +23,14 @@ else
             <thead>
                 <tr>
                     <th></th>
-                    <th>Name</th>
-                    <th>Win Rate</th>
-                    <th>Role</th>
+                    <th><strong>Hero</strong></th>
+                    <th><strong>Win Rate</strong></th>
+                    <th><strong>Role</strong></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var hero in Heroes)
+                @foreach (var hero in FilteredHeroes)
                 {
                     <tr>
                         <td class="hero-icon">
